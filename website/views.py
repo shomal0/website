@@ -20,9 +20,3 @@ def about():
 @login_required
 def profile():
     return render_template('profile.html')
-
-
-@views.route('/database')
-@login_required
-def database():
-    return render_template('database.html', users=User.query.all())
