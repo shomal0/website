@@ -1,6 +1,5 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from os import path
 from flask_login import LoginManager
 
 
@@ -30,13 +29,7 @@ def create_website():
     login_manager.init_app(website)
 
     @login_manager.user_loader
-    def load_user(id):
-        return User.query.get(int(id))
+    def load_user(user_id):
+        return User.query.get(int(user_id))
 
     return website
-
-
-def create_database(website):
-    if not path.exists('website/' + DB_NAME):
-        db.create_all(website=website)
-        print('created database')
