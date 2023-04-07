@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Database{% endblock%}
+
+{% block content %}
+{% for user in users %}
+<p>Email: {{user.email}} | Name: {{user.name}} | Password: {{user.password}}</p>
+{% endfor %}
+{% endblock %}
