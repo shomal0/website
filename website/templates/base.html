@@ -66,13 +66,39 @@
                 <a class="nav-link" href="/">Home</a>
             </li>
             {% endif %}
-            {% if request.url == 'http://127.0.0.1:5000/profile' %}
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Profile</a>
+            {% if request.url == 'http://127.0.0.1:5000/profile' or request.url == 'http://127.0.0.1:5000/profile_action' or request.url == 'http://127.0.0.1:5000/change_password' %}
+            <li class="nav-item dropdown active">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">Profile</a>
+                <ul class="dropdown-menu">
+                    {% if request.url == 'http://127.0.0.1:5000/change_password' %}
+                    <li><a class="dropdown-item active" href="/change_password">Change password</a></li>
+                    <li><a class="dropdown-item" href="/profile_action">Profile action</a></li>
+                    <li><hr class="dropdown divider"></li>
+                    <li><a class="dropdown-item" href="/profile">View profile</a></li>
+                    {% elif request.url == 'http://127.0.0.1:5000/profile_action' %}
+                    <li><a class="dropdown-item" href="/change_password">Change password</a></li>
+                    <li><a class="dropdown-item active" href="/profile_action">Profile action</a></li>
+                    <li><hr class="dropdown divider"></li>
+                    <li><a class="dropdown-item" href="/profile">View profile</a></li>
+                    {% elif request.url == 'http://127.0.0.1:5000/profile' %}
+                    <li><a class="dropdown-item" href="/change_password">Change password</a></li>
+                    <li><a class="dropdown-item " href="/profile_action">Profile action</a></li>
+                    <li><hr class="dropdown divider"></li>
+                    <li><a class="dropdown-item active" href="/profile">View profile</a></li>
+                    {% else %}
+                    {{ pass }}
+                    {% endif %}
+                </ul>
             </li>
             {% else %}
-            <li class="nav-item">
-                <a class="nav-link" href="/profile">Profile</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">Profile</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/change_password">Change password</a></li>
+                    <li><a class="dropdown-item" href="/profile_action">Profile action</a></li>
+                    <li><hr class="dropdown divider"></li>
+                    <li><a class="dropdown-item" href="/profile">View profile</a></li>
+                </ul>
             </li>
             {% endif %}
             <li class="nav-item">

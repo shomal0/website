@@ -19,3 +19,15 @@ def about():
 @login_required
 def profile():
     return render_template('profile.html')
+
+
+@views.route('/profile_action')
+@login_required
+def profile_action():
+    return render_template('profile_action.html')
+
+
+@views.route('/change_password')
+@login_required
+def change_profile():
+    return render_template('change_password.html')

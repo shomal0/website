@@ -59,3 +59,9 @@ def logout():
     logout_user()
     flash('You are logged out', category='info')
     return redirect(url_for('views.about'))
+
+
+@auth.route('/change_password')
+@login_required
+def change_password():
+    return render_template('change_password.html')
