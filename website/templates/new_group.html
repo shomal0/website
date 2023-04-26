@@ -1,0 +1,52 @@
+<{% extends 'base.html' %}
+
+{% block title %}New_Group{% endblock%}
+
+{% block content %}
+<p>Welcome to the website</p>
+{% extends 'base.html' %}
+
+{% block title %}New_Group{% endblock%}
+
+{% block content %}
+<br>
+<h3 align="center">Create New Group</h3>
+<br>
+<br>
+<table style="width:100%">
+    <tr>
+        <td width="35%"></td>
+        <th style="width:30%">
+            <form method="POST">
+                <div class="form-group">
+                    <label for="Group_Name">Group Name</label>
+                    <input
+                            type="Group_Name"
+                            class="form-control"
+                            id="Group_Name"
+                            name="Group_Name"
+                            placeholder="Enter Group Name"
+                            required="required"
+                    />
+
+                </div>
+                <div class="form-group">
+                    <label for="Username">Username</label>
+                    <input
+                            type="Username"
+                            class="form-control"
+                            id="Username"
+                            name="Username"
+                            placeholder="Enter Username"
+                            required="required"
+                    />
+
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </th>
+        <td width="35%"></td>
+    </tr>
+</table>
+{% endblock %}
