@@ -61,7 +61,18 @@ def logout():
     return redirect(url_for('views.about'))
 
 
-@auth.route('/change_password')
+@auth.route('/change_password', methods=['POST', 'GET'])
 @login_required
 def change_password():
+    if request.method == 'POST':
+        new_password1 = request.form.get('new_password1')
+        new_password2 = request.form.get('new_password2')
+        if len(new_password1) < 7:
+            flash('Password must have at least 8 characters.', category='error')
+        elif new_password1 != new_password2:
+            flash('Password don\'t match.', category='error')
+        else:
+            flash('Password changed!', category='success')
+            # replace the password in database to new_password1
+            return redirect(url_for('views.home'))
     return render_template('change_password.html')
