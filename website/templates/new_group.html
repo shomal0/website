@@ -1,12 +1,20 @@
+<{% extends 'base.html' %}
+
+{% block title %}New_Group{% endblock%}
+
+{% block content %}
+<p>Welcome to the website</p>
 {% extends 'base.html' %}
 
 {% block title %}New_Group{% endblock%}
 
 {% block content %}
+
 <br>
 <h3 align="center">Create New Group</h3>
 <br>
 <br>
+
 <table style="width:100%">
     <tr>
         <td width="35%"></td>
@@ -15,32 +23,62 @@
                 <div class="form-group">
                     <label for="Group_Name">Group Name</label>
                     <input
-                            type="text"
+                            type="Group_Name"
                             class="form-control"
                             id="Group_Name"
                             name="Group_Name"
                             placeholder="Enter Group Name"
                             required="required"
                     />
-
                 </div>
-                <div class="form-group">
-                    <label for="Username">Username</label>
-                    <input
-                            type="text"
-                            class="form-control"
-                            id="Username"
-                            name="Username"
-                            placeholder="Enter Username"
-                            required="required"
-                    />
 
+                <div class="button_list">
+                    <label for="tb_Username">Add User</label>
+                    <input
+
+                           type="Username"
+                           class="form-control"
+                           id="tb_Username"
+                           name="Username"
+                           placeholder="Enter One At A Time"
+                           required="required"
+                    />
+                    </div>
+                <div>
+                 <select align="center" id="users_list" multiple>
+                    <option value="1">adam</option>
+                    <option value="2">daniel</option>
+                    <option value="3">ori</option>
+                    <option value="4">mika</option>
+                 </select>
                 </div>
                 <br>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button id="btn_create_group" type="submit" class="btn btn-primary">Create Group</button>
+                <button id="btn_add_user"   type="button" onclick="btn_add_user_clicked()">Add User</button>
             </form>
+
         </th>
         <td width="35%"></td>
     </tr>
 </table>
+<script>
+  function btn_add_user_clicked(){
+        var u_list = document.getElementById("users_list");
+        var u_text = document.getElementById("tb_Username").value;
+        var bool=false
+        for(var i=0; i < u_list.length; i++)
+        {
+            if(u_list.options[i].text==u_text){
+                bool=true
+            }
+        }
+        if (bool==true) {
+            document.getElementById("tb_Username").style.color = "green";
+        } else {
+            document.getElementById("tb_Username").style.color = "red";
+        }
+   }
+</script>
+
+
 {% endblock %}
