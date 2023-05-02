@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, flash, request, redirect, url_for
 from flask_login import login_required
 
 views = Blueprint('views', __name__)
@@ -27,7 +27,11 @@ def profile_action():
     return render_template('profile_action.html')
 
 
-@views.route('/change_password')
+@views.route('/new_group', methods=['POST', 'GET'])
 @login_required
-def change_profile():
-    return render_template('change_password.html')
+def new_group():
+    if request.method == 'POST':
+        flash('Group created!', category='success')
+        # add group to database
+        return redirect(url_for('views.home'))
+    return render_template('new_group.html')

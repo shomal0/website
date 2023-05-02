@@ -13,7 +13,6 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(50))
     name = db.Column(db.String(50))
-    # is_admin = db.Column(db.Boolean(False))
     participants= db.relationship('Group', secondary=user_group, backref='participant')
 
    # def __repr__(self):

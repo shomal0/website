@@ -66,6 +66,15 @@
                 <a class="nav-link" href="/">Home</a>
             </li>
             {% endif %}
+            {% if request.url == 'http://127.0.0.1:5000/new_group' %}
+            <li class="nav-item active">
+                <a class="nav-link" href="#">New group</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="/new_group">New group</a>
+            </li>
+            {% endif %}
             {% if request.url == 'http://127.0.0.1:5000/profile' or request.url == 'http://127.0.0.1:5000/profile_action' or request.url == 'http://127.0.0.1:5000/change_password' %}
             <li class="nav-item dropdown active">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">Profile</a>
