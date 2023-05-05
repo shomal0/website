@@ -1,3 +1,4 @@
+import urllib.parse
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -23,7 +24,7 @@ def login():
         else:
             flash('Email does not exist.', category='error')
 
-    return render_template('login.html')
+    return render_template('login.html', url=urllib.parse.urlparse(request.url))
 
 
 @auth.route('/sign_up', methods=['POST', 'GET'])
@@ -50,7 +51,7 @@ def sign_up():
             login_user(new_user, remember=True)
             flash('Account created', category='success')
             return redirect(url_for('views.home'))
-    return render_template('sign_up.html')
+    return render_template('sign_up.html', url=urllib.parse.urlparse(request.url))
 
 
 @auth.route('/logout')
@@ -80,4 +81,4 @@ def change_password():
 
             # replace the password in database to new_password1
             return redirect(url_for('views.home'))
-    return render_template('change_password.html')
+    return render_template('change_password.html', url=urllib.parse.urlparse(request.url))

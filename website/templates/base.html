@@ -23,83 +23,82 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            {% if request.url == 'http://127.0.0.1:5000/about' or request.url == 'http://127.0.0.1:5000/login' or
-            request.url == 'http://127.0.0.1:5000/sign_up' or request.url == 'http://127.0.0.1:5000/login?next=%2F' or
-            request.url == 'http://127.0.0.1:5000/login?next=%2Flogout' or request.url ==
-            'http://127.0.0.1:5000/login?next=%2Fdatabase'%}
-            {% if request.url == 'http://127.0.0.1:5000/about' %}
+            {% if url.path == '/about' or url.path == '/login' or url.path == '/sign_up' %}
+                {% if url.path == '/about' %}
             <li class="nav-item active">
                 <a class="nav-link" href="#">About</a>
             </li>
-            {% else %}
+                {% else %}
             <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
             </li>
-            {% endif %}
-            {% if request.url == 'http://127.0.0.1:5000/login' or request.url == 'http://127.0.0.1:5000/login?next=%2F'
-            or request.url == 'http://127.0.0.1:5000/login?next=%2Flogout' or request.url ==
-            'http://127.0.0.1:5000/login?next=%2Fdatabase' %}
+                {% endif %}
+
+                {% if url.path == '/login' %}
             <li class="nav-item active">
                 <a class="nav-link" href="#">Login</a>
             </li>
-            {% else %}
+                {% else %}
             <li class="nav-item">
                 <a class="nav-link" href="/login">Login</a>
             </li>
-            {% endif %}
-            {% if request.url == 'http://127.0.0.1:5000/sign_up' %}
+                {% endif %}
+
+                {% if url.path == '/sign_up' %}
             <li class="nav-item active">
                 <a class="nav-link" href="#">Sign Up</a>
             </li>
-            {% else %}
+                {% else %}
             <li class="nav-item">
                 <a class="nav-link" href="/sign_up">Sign Up</a>
             </li>
-            {% endif %}
+                {% endif %}
             {% else %}
-            {% if request.url == 'http://127.0.0.1:5000/' %}
+                {% if url.path == '/' %}
             <li class="nav-item active">
                 <a class="nav-link" href="#">Home</a>
             </li>
-            {% else %}
+                {% else %}
             <li class="nav-item">
                 <a class="nav-link" href="/">Home</a>
             </li>
-            {% endif %}
-            {% if request.url == 'http://127.0.0.1:5000/new_group' %}
+                {% endif %}
+
+                {% if url.path == '/new_group' %}
             <li class="nav-item active">
                 <a class="nav-link" href="#">New group</a>
             </li>
-            {% else %}
+                {% else %}
             <li class="nav-item">
                 <a class="nav-link" href="/new_group">New group</a>
             </li>
-            {% endif %}
-            {% if request.url == 'http://127.0.0.1:5000/profile' or request.url == 'http://127.0.0.1:5000/profile_action' or request.url == 'http://127.0.0.1:5000/change_password' %}
+                {% endif %}
+
+                {% if url.path == '/profile' or url.path == '/profile_action' or url.path == '/change_password' %}
             <li class="nav-item dropdown active">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">Profile</a>
                 <ul class="dropdown-menu">
-                    {% if request.url == 'http://127.0.0.1:5000/change_password' %}
+                    {% if url.path == '/change_password' %}
                     <li><a class="dropdown-item active" href="/change_password">Change password</a></li>
                     <li><a class="dropdown-item" href="/profile_action">Profile action</a></li>
                     <li><hr class="dropdown divider"></li>
                     <li><a class="dropdown-item" href="/profile">View profile</a></li>
-                    {% elif request.url == 'http://127.0.0.1:5000/profile_action' %}
+                    {% elif url.path == '/profile_action' %}
                     <li><a class="dropdown-item" href="/change_password">Change password</a></li>
                     <li><a class="dropdown-item active" href="/profile_action">Profile action</a></li>
                     <li><hr class="dropdown divider"></li>
                     <li><a class="dropdown-item" href="/profile">View profile</a></li>
-                    {% elif request.url == 'http://127.0.0.1:5000/profile' %}
+                    {% elif url.path == '/profile' %}
                     <li><a class="dropdown-item" href="/change_password">Change password</a></li>
                     <li><a class="dropdown-item " href="/profile_action">Profile action</a></li>
                     <li><hr class="dropdown divider"></li>
                     <li><a class="dropdown-item active" href="/profile">View profile</a></li>
                     {% else %}
-                    {{ pass }}
+                        {{ pass }}
                     {% endif %}
                 </ul>
             </li>
-            {% else %}
+                {% else %}
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">Profile</a>
                 <ul class="dropdown-menu">
@@ -109,7 +108,7 @@
                     <li><a class="dropdown-item" href="/profile">View profile</a></li>
                 </ul>
             </li>
-            {% endif %}
+                {% endif %}
             <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
             </li>

@@ -1,9 +1,3 @@
-<{% extends 'base.html' %}
-
-{% block title %}New_Group{% endblock%}
-
-{% block content %}
-<p>Welcome to the website</p>
 {% extends 'base.html' %}
 
 {% block title %}New_Group{% endblock%}
@@ -14,7 +8,6 @@
 <h3 align="center">Create New Group</h3>
 <br>
 <br>
-
 <table style="width:100%">
     <tr>
         <td width="35%"></td>
@@ -23,7 +16,7 @@
                 <div class="form-group">
                     <label for="Group_Name">Group Name</label>
                     <input
-                            type="Group_Name"
+                            type="text"
                             class="form-control"
                             id="Group_Name"
                             name="Group_Name"
@@ -35,15 +28,13 @@
                 <div class="button_list">
                     <label for="tb_Username">Add User</label>
                     <input
-
-                           type="Username"
+                           type="text"
                            class="form-control"
                            id="tb_Username"
                            name="Username"
                            placeholder="Enter One At A Time"
-                           required="required"
                     />
-                    </div>
+                </div>
                 <div>
                  <select align="center" id="users_list" multiple>
                     <option value="1">adam</option>
@@ -51,12 +42,11 @@
                     <option value="3">ori</option>
                     <option value="4">mika</option>
                  </select>
+                    <br>
+                    <button id="btn_add_user"   type="button" onclick="btn_add_user_clicked()">Add User</button>
                 </div>
-                <br>
                 <button id="btn_create_group" type="submit" class="btn btn-primary">Create Group</button>
-                <button id="btn_add_user"   type="button" onclick="btn_add_user_clicked()">Add User</button>
             </form>
-
         </th>
         <td width="35%"></td>
     </tr>
@@ -79,6 +69,5 @@
         }
    }
 </script>
-
 
 {% endblock %}
