@@ -34,6 +34,10 @@ def profile_action():
 @login_required
 def new_group():
     if request.method == 'POST':
+        name = request.form.get('Group_Name')
+        create_group = Group(name=name)
+        db.session.add(create_group)
+        db.session.commit()
         flash('Group created!', category='success')
         return redirect(url_for('views.home'))
     return render_template('new_group.html', url=urllib.parse.urlparse(request.url))
