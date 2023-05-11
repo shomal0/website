@@ -1,8 +1,11 @@
+import json
 import urllib.parse
-from .models import Group
-from . import db
 from flask import Blueprint, render_template, flash, request, redirect, url_for
-from flask_login import login_required
+from flask.json import jsonify
+from flask_login import login_required, current_user
+
+from . import db
+from .models import Group, Note
 
 views = Blueprint('views', __name__)
 
@@ -10,7 +13,35 @@ views = Blueprint('views', __name__)
 @views.route('/', methods=['POST', 'GET'])
 @login_required
 def home():
-    return render_template('home.html', url=urllib.parse.urlparse(request.url))
+    if request.method == 'POST':
+        note = request.form.get('note')
+
+        if len(note) <= 1:
+            flash('Note is too short!', category='error')
+
+        elif len(note) >= 100:
+            flash('Note is too long!', category='error')
+
+        else:
+            new_note = Note(data=note, user_id=current_user.id)
+            db.session.add(new_note)
+            db.session.commit()
+            flash('text sent!', category='success')
+
+    return render_template('home.html', user=current_user,  url=urllib.parse.urlparse(request.url))
+
+
+@views.route('/delete-note', methods=['POST'])
+def delete_note():
+    note = json.loads(request.data)
+    note_id = note['note_id']
+    note = Note.query.get(note_id)
+    if note:
+        if note.user_id == current_user.id:
+            db.session.delete(note)
+            db.session.commit()
+
+    return jsonify({})
 
 
 @views.route('/about')
