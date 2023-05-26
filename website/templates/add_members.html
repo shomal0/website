@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}New_Group{% endblock%}
+
+{% block content %}
+
+<br>
+<h3 align="center">Add users to Group</h3>
+<br>
+<br>
+<table style="width:100%">
+    <tr>
+        <td width="35%"></td>
+        <th style="width:30%">
+            <form method="POST">
+                <div class="button_list">
+                    <label for="name">Add User</label>
+                    <input
+                           type="text"
+                           class="form-control"
+                           id="name"
+                           name="name"
+                           placeholder="Enter A name"
+                    />
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary" name="submit_button" value="add_user">Add User</button>
+                <button type="submit" class="btn btn-primary" name="submit_button" value="confirm_group">Confirm group</button>
+            </form>
+        </th>
+        <td width="35%"></td>
+    </tr>
+</table>
+
+{% endblock %}

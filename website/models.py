@@ -23,7 +23,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(50))
     name = db.Column(db.String(50))
     notes = db.relationship('Note')
-    participants = db.relationship('Group', secondary=user_group, backref='participant')
+    groups = db.relationship('Group', secondary=user_group, backref='members')
 
     def __repr__(self):
         return f'<User: {self.name}>'

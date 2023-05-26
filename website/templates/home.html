@@ -4,24 +4,22 @@
 
 {% block content %}
 
-<h1 align="center">Chat Room</h1>
-<ul class="list-group list-group-flush" id="notes">
-  {% for note in user.notes %}
-  <li class="list-group-item">{{ note.data }}
-    <button type="button" class="close" onClick="deleteNote({{ note.id }})">
-      <span aria-hidden="true">&times;</span>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
     </button>
-  </li>
-  {% endfor %}
-</ul>
-<form method="POST">
-    <div class="center">
-        <textarea name="note" id="note" class="form-control"></textarea>
-        <br>
-        <div align="center">
-            <button type="submit" class="btn btn-primary">Send</button>
-        </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            {% for group in groups %}
+            <li class="nav-item">
+                <a class="nav-link" href="group">{{ group.name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
     </div>
-</form>
+</nav>
+
+<h1>Welcome to the home page!</h1>
 
 {% endblock %}
