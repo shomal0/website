@@ -10,17 +10,22 @@
 <br>
 <table style="width:100%">
     <tr>
-        <td width="35%"></td>
+        <td width="35%">
+            <h5>{{ group_name }}'s members:</h5>
+            {% for member in members %}
+                <h6 title="{{ member.email }}">{{ member.name }}</h6>
+            {% endfor %}
+        </td>
         <th style="width:30%">
             <form method="POST">
                 <div class="button_list">
-                    <label for="name">Add User</label>
+                    <label for="email">Add User</label>
                     <input
                            type="text"
                            class="form-control"
-                           id="name"
-                           name="name"
-                           placeholder="Enter A name"
+                           id="email"
+                           name="email"
+                           placeholder="Enter An email"
                     />
                 </div>
                 <br>

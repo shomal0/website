@@ -13,7 +13,7 @@
         <ul class="navbar-nav mr-auto">
             {% for group in groups %}
             <li class="nav-item">
-                <a class="nav-link" href="group">{{ group.name }}</a>
+                <a class="nav-link" href="group?group_index={{ loop.index - 1 }}">{{ group.name }}</a>
             </li>
             {% endfor %}
         </ul>

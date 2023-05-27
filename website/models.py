@@ -8,7 +8,7 @@ class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     data = db.Column(db.String(10000))
     date = db.Column(db.DateTime(timezone=True), default=datetime.now())
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    group_id = db.Column(db.Integer, db.ForeignKey('group.id'))
 
 
 user_group = db.Table('user_group',
@@ -22,7 +22,6 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(50))
     name = db.Column(db.String(50))
-    notes = db.relationship('Note')
     groups = db.relationship('Group', secondary=user_group, backref='members')
 
     def __repr__(self):
@@ -30,8 +29,9 @@ class User(db.Model, UserMixin):
 
 
 class Group(db.Model):
-    name = db.Column(db.String(50), nullable=False)
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50))
+    notes = db.relationship('Note')
 
     def __repr__(self):
         return f'<Group: {self.name}>'
