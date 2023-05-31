@@ -20,7 +20,8 @@
     </div>
 </nav>
 
-  {% set current_group = groups[request.args["group_index"] | int] %}
+  {% set current_group_index = request.args["group_index"] | int %}
+  {% set current_group = groups[current_group_index] %}
 
 <table style="width:100%">
     <tr>
@@ -29,7 +30,7 @@
             <ul class="list-group list-group-flush" id="notes">
               {% for note in current_group.notes %}
               <li class="list-group-item">{{ note.data }}
-                <button type="button" class="close" onClick="deleteNote({{ note.id }})">
+                <button type="button" class="close" onClick="deleteNote({{ note.id }}, {{ current_group_index }})">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </li>
@@ -45,18 +46,11 @@
                 </div>
             </form>
         </td>
-        <td width="20%"></td>
+        <td width="35%"></td>
         <td width="14%">
         <h5 align="center">group members</h5>
-            {% for member in members %}
-            <h6 align="right">{{ member.name }} |</h6>
-            {% endfor %}
-        </td>
-        <td width="2%">
-        <td width="14%" align="left">
-        <h5 align="center">member's emails</h5>
-            {% for member in members %}
-            <h6 align="left">{{ member.email }}</h6>
+            {% for member in current_group.members %}
+            <h6 title="{{ member.email }}">{{ member.name }}</h6>
             {% endfor %}
         </td>
     </tr>

@@ -27,25 +27,25 @@ def group():
         elif len(note) >= 100:
             flash('Note is too long!', category='error')
         else:
-            new_note = Note(data=note, group_id=int(request.args["group_index"]) + 1)
+            note_group_index = int(request.args["group_index"])
+            note_group_id = current_user.groups[note_group_index].id
+            new_note = Note(data=note, group_id=note_group_id)
             db.session.add(new_note)
             db.session.commit()
             flash('text sent!', category='success')
-    username = User.query.filter_by(name=current_user.name).first()
-    current_group = username.groups[int(request.args["group_index"])]
-    session['current_group'] = current_group
-    group_id = Group.query.filter_by(id=current_group.id).first()
-    return render_template('group.html', url=urllib.parse.urlparse(request.url), groups=username.groups, members=group_id.members)
+    return render_template('group.html', url=urllib.parse.urlparse(request.url), groups=current_user.groups)
 
 
 @views.route('/delete-note', methods=['POST'])
 def delete_note():
-    note = json.loads(request.data)
-    note_id = note['note_id']
+    delete_data = json.loads(request.data)
+    note_id = delete_data['note_id']
+    note_group_index = int(delete_data['group_index'])
+
     note = Note.query.get(note_id)
-    current_group = session['current_group']
+    note_group = current_user.groups[note_group_index]
     if note:
-        if note.group_id == current_group.id:
+        if note.group_id == note_group.id:
             db.session.delete(note)
             db.session.commit()
 
@@ -81,9 +81,9 @@ def add_members():
             email = request.form.get('email')
             email_in_db = User.query.filter_by(email=email).first()
             if email_in_db:
+                group_name = session['group_name']
+                db_group = Group.query.filter_by(name=group_name).first()
                 email_in_db.groups.append(db_group)
-                you = User.query.filter_by(email=current_user.email).first()
-                you.groups.append(db_group)
                 db.session.add(email_in_db)
                 db.session.commit()
                 flash('User added!', category='success')

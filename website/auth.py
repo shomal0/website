@@ -80,6 +80,5 @@ def change_password():
             update_password.password = generate_password_hash(new_password1)
             db.session.commit()
 
-            # replace the password in database to new_password1
             return redirect(url_for('views.home'))
     return render_template('change_password.html', url=urllib.parse.urlparse(request.url))
